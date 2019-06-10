@@ -1,3 +1,3 @@
 # LibWebTranspiler
 
-A description of this package.
+A Swift wrapper of a ECMAScript, TypeScript, CoffeeScript, Sass transpiler
