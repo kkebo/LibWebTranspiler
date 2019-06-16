@@ -8,9 +8,9 @@
 
 import JavaScriptCore
 
-struct CoffeeScriptCompiler: JSCompiler {
-	static let instance = CoffeeScriptCompiler()
-	let context: JSContext = {
+public struct CoffeeScriptCompiler: JSCompiler {
+	public static let instance = CoffeeScriptCompiler()
+	public let context: JSContext = {
 		let ctx: JSContext = JSContext()
 
 		do {
@@ -22,7 +22,7 @@ struct CoffeeScriptCompiler: JSCompiler {
 		return ctx
 	}()
 
-	func compile(code: String, options: [String: Any]? = nil) throws -> String {
+	public func compile(code: String, options: [String: Any]? = nil) throws -> String {
 		let result: JSValue = context.objectForKeyedSubscript("CoffeeScript").invokeMethod("compile", withArguments: [code, options ?? [:]])
 
 		if result.isUndefined {
@@ -32,7 +32,7 @@ struct CoffeeScriptCompiler: JSCompiler {
 		return result.description
 	}
 
-	func compileAsLiterate(code: String, options: [String: Any]? = nil) throws -> String {
+	public func compileAsLiterate(code: String, options: [String: Any]? = nil) throws -> String {
 		var options = options
 		options?["literate"] = true
 		return try compile(code: code, options: options)

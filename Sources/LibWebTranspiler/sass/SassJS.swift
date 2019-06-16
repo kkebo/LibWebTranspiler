@@ -9,10 +9,10 @@
 import Foundation
 import libsass
 
-struct SassCompiler: Compiler {
-	static let instance = SassCompiler()
+public struct SassCompiler: Compiler {
+	public static let instance = SassCompiler()
 
-	func compile(code: String, options: [String: Any]? = nil) throws -> String {
+	public func compile(code: String, options: [String: Any]? = nil) throws -> String {
 		return try code.withCString { cstr -> String in
             let inputString = UnsafeMutablePointer<Int8>.allocate(capacity: code.count)
             inputString.initialize(from: cstr, count: code.count)

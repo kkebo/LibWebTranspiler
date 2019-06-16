@@ -8,16 +8,16 @@
 
 import JavaScriptCore
 
-enum CompileError: Error {
+public enum CompileError: Error {
 	case Unknown(String)
 }
 
-protocol Compiler {
-	static var instance: Self { get }
+public protocol Compiler {
+    static var instance: Self { get }
 
 	func compile(code: String, options: [String: Any]?) throws -> String
 }
 
-protocol JSCompiler: Compiler {
+public protocol JSCompiler: Compiler {
 	var context: JSContext { get }
 }

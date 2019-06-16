@@ -8,9 +8,9 @@
 
 import JavaScriptCore
 
-struct Babel: JSCompiler {
-	static let instance = Babel()
-	let context: JSContext = {
+public struct Babel: JSCompiler {
+    public static let instance = Babel()
+	public let context: JSContext = {
 		let ctx: JSContext = JSContext()
 
 		do {
@@ -22,7 +22,7 @@ struct Babel: JSCompiler {
 		return ctx
 	}()
 
-	func compile(code: String, options: [String: Any]? = nil) throws -> String {
+	public func compile(code: String, options: [String: Any]? = nil) throws -> String {
 		var options = options
 		options?["presets"] = ["es2015"]
 		

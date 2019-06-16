@@ -8,9 +8,9 @@
 
 import JavaScriptCore
 
-struct TypeScriptCompiler: JSCompiler {
-	static let instance = TypeScriptCompiler()
-	let context: JSContext = {
+public struct TypeScriptCompiler: JSCompiler {
+    public static let instance = TypeScriptCompiler()
+    public let context: JSContext = {
 		let ctx: JSContext = JSContext()
 
 		do {
@@ -22,7 +22,7 @@ struct TypeScriptCompiler: JSCompiler {
 		return ctx
 	}()
 
-	func compile(code: String, options: [String: Any]? = nil) -> String {
+	public func compile(code: String, options: [String: Any]? = nil) -> String {
 		return context.objectForKeyedSubscript("ts").invokeMethod("transpile", withArguments: [code, options ?? [:]]).description
 	}
 }
