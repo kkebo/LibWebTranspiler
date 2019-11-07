@@ -11,18 +11,18 @@ import JavaScriptCore
 public struct TypeScriptCompiler: JSCompiler {
     public static let instance = TypeScriptCompiler()
     public let context: JSContext = {
-		let ctx: JSContext = JSContext()
+        let ctx: JSContext = JSContext()
 
-		do {
-			let str = try String(contentsOfFile: Bundle.main.path(forResource: "typescriptServices", ofType: "js")!, encoding: .utf8)
-			ctx.evaluateScript(str)
-		} catch {
-		}
+        do {
+            let str = try String(contentsOfFile: Bundle.main.path(forResource: "typescriptServices", ofType: "js")!, encoding: .utf8)
+            ctx.evaluateScript(str)
+        } catch {
+        }
 
-		return ctx
-	}()
+        return ctx
+    }()
 
-	public func compile(code: String, options: [String: Any]? = nil) -> String {
-		return context.objectForKeyedSubscript("ts").invokeMethod("transpile", withArguments: [code, options ?? [:]]).description
-	}
+    public func compile(code: String, options: [String: Any]? = nil) -> String {
+        return context.objectForKeyedSubscript("ts").invokeMethod("transpile", withArguments: [code, options ?? [:]]).description
+    }
 }

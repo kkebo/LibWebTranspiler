@@ -9,15 +9,15 @@
 import JavaScriptCore
 
 public enum CompileError: Error {
-	case Unknown(String)
+    case Unknown(String)
 }
 
 public protocol Compiler {
     static var instance: Self { get }
 
-	func compile(code: String, options: [String: Any]?) throws -> String
+    func compile(code: String, options: [String: Any]?) throws -> String
 }
 
 public protocol JSCompiler: Compiler {
-	var context: JSContext { get }
+    var context: JSContext { get }
 }

@@ -10,28 +10,28 @@ import JavaScriptCore
 
 public struct Babel: JSCompiler {
     public static let instance = Babel()
-	public let context: JSContext = {
-		let ctx: JSContext = JSContext()
+    public let context: JSContext = {
+        let ctx: JSContext = JSContext()
 
-		do {
-			let str = try String(contentsOfFile: Bundle.main.path(forResource: "babel.min", ofType: "js")!, encoding: .utf8)
-			ctx.evaluateScript(str)
-		} catch {
-		}
+        do {
+            let str = try String(contentsOfFile: Bundle.main.path(forResource: "babel.min", ofType: "js")!, encoding: .utf8)
+            ctx.evaluateScript(str)
+        } catch {
+        }
 
-		return ctx
-	}()
+        return ctx
+    }()
 
-	public func compile(code: String, options: [String: Any]? = nil) throws -> String {
-		var options = options
-		options?["presets"] = ["es2015"]
-		
-		let result: JSValue = context.objectForKeyedSubscript("Babel").invokeMethod("transform", withArguments: [code, options ?? [:]])
-		
-		if result.isUndefined {
-			throw CompileError.Unknown("Unknown Error")
-		}
-		
-		return result.objectForKeyedSubscript("code").description
-	}
+    public func compile(code: String, options: [String: Any]? = nil) throws -> String {
+        var options = options
+        options?["presets"] = ["es2015"]
+        
+        let result: JSValue = context.objectForKeyedSubscript("Babel").invokeMethod("transform", withArguments: [code, options ?? [:]])
+        
+        if result.isUndefined {
+            throw CompileError.Unknown("Unknown Error")
+        }
+        
+        return result.objectForKeyedSubscript("code").description
+    }
 }
